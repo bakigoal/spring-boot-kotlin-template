@@ -1,4 +1,4 @@
-package com.bakigoal.demo.errorHandler
+package com.bakigoal.demo.exception.handler
 
 import java.sql.Timestamp
 import java.time.Instant

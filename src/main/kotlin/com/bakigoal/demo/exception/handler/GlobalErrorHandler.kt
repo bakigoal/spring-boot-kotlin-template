@@ -1,4 +1,4 @@
-package com.bakigoal.demo.errorHandler
+package com.bakigoal.demo.exception.handler
 
 import com.bakigoal.demo.exception.EntityAlreadyExists
 import org.springframework.http.HttpStatus
