@@ -1,8 +1,9 @@
 package com.bakigoal.demo.exception
 
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.ResponseStatus
+import org.springframework.web.server.ResponseStatusException
 
-@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-class EntityAlreadyExistsException(val id: Long): RuntimeException() {
-}
+class EntityAlreadyExistsException(id: Long) : ResponseStatusException(
+    HttpStatus.CONFLICT,
+    "Entity with id: $id is already exist"
+)

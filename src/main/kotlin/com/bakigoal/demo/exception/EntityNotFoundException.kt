@@ -1,9 +1,9 @@
 package com.bakigoal.demo.exception
 
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.ResponseStatus
-import java.lang.RuntimeException
+import org.springframework.web.server.ResponseStatusException
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-class EntityNotFoundException: RuntimeException() {
-}
+class EntityNotFoundException : ResponseStatusException(
+    HttpStatus.NOT_FOUND,
+    "No entity found with given id"
+)
