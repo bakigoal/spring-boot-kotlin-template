@@ -2,7 +2,7 @@ package com.bakigoal.demo.service
 
 import com.bakigoal.demo.dao.repository.BookRepository
 import com.bakigoal.demo.dto.BookDto
-import com.bakigoal.demo.exception.EntityAlreadyExists
+import com.bakigoal.demo.exception.EntityAlreadyExistsException
 import com.bakigoal.demo.exception.EntityNotFoundException
 import com.bakigoal.demo.mapper.toDto
 import com.bakigoal.demo.mapper.toEntity
@@ -24,7 +24,7 @@ class BookService(
 
     fun addBook(book: BookDto): BookDto {
         if (book.id != null && bookRepository.existsById(book.id!!)) {
-            throw EntityAlreadyExists(book.id!!)
+            throw EntityAlreadyExistsException(book.id!!)
         }
         return bookRepository.save(book.toEntity()).toDto()
     }

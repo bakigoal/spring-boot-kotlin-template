@@ -1,6 +1,6 @@
 package com.bakigoal.demo.exception.handler
 
-import com.bakigoal.demo.exception.EntityAlreadyExists
+import com.bakigoal.demo.exception.EntityAlreadyExistsException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -11,8 +11,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 class GlobalErrorHandler : ResponseEntityExceptionHandler() {
 
-    @ExceptionHandler(value = [EntityAlreadyExists::class])
-    protected fun handleEntityAlreadyExists(ex: EntityAlreadyExists, request: ServletWebRequest): ResponseEntity<Any> {
+    @ExceptionHandler(value = [EntityAlreadyExistsException::class])
+    protected fun handleEntityAlreadyExists(ex: EntityAlreadyExistsException, request: ServletWebRequest): ResponseEntity<Any> {
         val bodyOfResponse = "Entity with id: ${ex.id} is already exists"
         val status = HttpStatus.CONFLICT
         val body = ErrorDto(status.value(), bodyOfResponse, request.request.servletPath)
