@@ -1,6 +1,5 @@
 package com.bakigoal.demo.exception.handler
 
-import mu.KLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -11,9 +10,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 class GlobalErrorHandler : ResponseEntityExceptionHandler() {
-
-    companion object : KLogging() {
-    }
 
     @ExceptionHandler(value = [ResponseStatusException::class])
     protected fun handleResponseStatusException(
