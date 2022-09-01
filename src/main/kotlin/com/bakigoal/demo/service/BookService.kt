@@ -19,7 +19,7 @@ class BookService(
     }
 
     fun getBookById(id: Long): BookDto {
-        return bookRepository.findById(id).map { it.toDto() }.orElseThrow { EntityNotFoundException() }
+        return bookRepository.findById(id).map { it.toDto() }.orElseThrow { EntityNotFoundException(id) }
     }
 
     fun addBook(book: BookDto): BookDto {
@@ -30,6 +30,9 @@ class BookService(
     }
 
     fun updateBook(book: BookDto): BookDto {
+        if (book.id == null || !bookRepository.existsById(book.id!!)) {
+            throw EntityNotFoundException(book.id!!)
+        }
         return bookRepository.save(book.toEntity()).toDto()
     }
 }
