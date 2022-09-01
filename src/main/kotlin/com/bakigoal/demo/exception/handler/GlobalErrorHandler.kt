@@ -1,6 +1,6 @@
 package com.bakigoal.demo.exception.handler
 
-import com.bakigoal.demo.util.loggerFor
+import mu.KLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -12,8 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 class GlobalErrorHandler : ResponseEntityExceptionHandler() {
 
-    companion object {
-        private val LOG = loggerFor<GlobalErrorHandler>()
+    companion object : KLogging() {
     }
 
     @ExceptionHandler(value = [ResponseStatusException::class])
@@ -27,7 +26,7 @@ class GlobalErrorHandler : ResponseEntityExceptionHandler() {
             ex.message,
             request.request.servletPath
         )
-        LOG.error("Error: $body")
+        logger.error("Error: $body")
         return ResponseEntity.status(status).body(body)
     }
 
@@ -39,7 +38,7 @@ class GlobalErrorHandler : ResponseEntityExceptionHandler() {
             ex.message ?: status.reasonPhrase,
             request.request.servletPath
         )
-        LOG.error("Error: $body")
+        logger.error("Error: $body")
         return ResponseEntity.status(status).body(body)
     }
 }
