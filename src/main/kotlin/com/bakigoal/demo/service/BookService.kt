@@ -34,11 +34,11 @@ class BookService(
         return bookMapper.toDto(savedBook)
     }
 
-    fun updateBook(book: BookDto): BookDto {
-        if (book.id == null || !bookRepository.existsById(book.id)) {
-            throw EntityNotFoundException(book.id!!)
-        }
-        val savedBook = bookRepository.save(bookMapper.toEntity(book))
-        return bookMapper.toDto(savedBook)
+    fun updateBook(id: Long, bookDto: BookDto): BookDto {
+        return bookRepository.findById(id)
+            .map { bookMapper.toEntity(bookDto, it) }
+            .map { bookRepository.save(it) }
+            .map { bookMapper.toDto(it) }
+            .orElseThrow { EntityNotFoundException(id) }
     }
 }

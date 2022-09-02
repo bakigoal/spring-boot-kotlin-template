@@ -33,6 +33,6 @@ class BookController(
 
     override fun updateBook(id: Long, bookDto: BookDto): ResponseEntity<BookDto> {
         logger.info { "update Book API is called..." }
-        return ResponseEntity.ok(bookService.updateBook(bookDto))
+        return ResponseEntity.ok(bookService.updateBook(id, bookDto))
     }
 }

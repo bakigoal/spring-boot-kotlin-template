@@ -14,5 +14,5 @@ data class Book(
         joinColumns = [JoinColumn(name = "book_id")],
         inverseJoinColumns = [JoinColumn(name = "author_name")]
     )
-    val authors: Set<Author> = HashSet()
+    val authors: Set<Author>? = HashSet()
 )
