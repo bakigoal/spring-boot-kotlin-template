@@ -1,3 +1,10 @@
 package com.bakigoal.demo.dto
 
-data class BookDto(val title: String, var id: Long?)
+import com.fasterxml.jackson.annotation.JsonProperty
+
+data class BookDto(
+    @JsonProperty("id")
+    var id: Long?,
+    @JsonProperty("title")
+    var title: String
+)

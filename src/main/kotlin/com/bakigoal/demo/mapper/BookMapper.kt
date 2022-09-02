@@ -1,12 +1,14 @@
 package com.bakigoal.demo.mapper
 
-import com.bakigoal.demo.dto.BookDto
 import com.bakigoal.demo.dao.entity.Book
+import com.bakigoal.demo.dto.BookDto
+import org.mapstruct.Mapper
+import org.mapstruct.ReportingPolicy
 
-fun Book.toDto(): BookDto {
-    return BookDto(title, id)
-}
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+interface BookMapper {
 
-fun BookDto.toEntity(): Book {
-    return Book(title, id)
+    fun toDto(book: Book): BookDto
+
+    fun toEntity(bookDto: BookDto): Book
 }
