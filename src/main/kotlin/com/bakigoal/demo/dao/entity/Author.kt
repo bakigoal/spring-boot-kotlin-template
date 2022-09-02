@@ -8,5 +8,5 @@ import javax.persistence.Id
 data class Author(
     @Id
     val name: String,
-    val dateOfBirth: LocalDate?
+    var dateOfBirth: LocalDate?
 )

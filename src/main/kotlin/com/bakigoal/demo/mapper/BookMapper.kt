@@ -3,6 +3,7 @@ package com.bakigoal.demo.mapper
 import com.bakigoal.demo.dao.entity.Book
 import com.bakigoal.model.BookDto
 import org.mapstruct.Mapper
+import org.mapstruct.Mapping
 import org.mapstruct.MappingTarget
 import org.mapstruct.ReportingPolicy
 
@@ -13,5 +14,6 @@ interface BookMapper {
 
     fun toEntity(bookDto: BookDto): Book
 
+    @Mapping(target = "title", source = "title")
     fun toEntity(bookDto: BookDto, @MappingTarget book: Book): Book
 }
