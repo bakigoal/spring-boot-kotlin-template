@@ -6,5 +6,7 @@ data class BookDto(
     @JsonProperty("id")
     var id: Long?,
     @JsonProperty("title")
-    var title: String
+    var title: String,
+    @JsonProperty("authors")
+    val authors: Set<AuthorDto> = HashSet()
 )
