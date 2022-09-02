@@ -1,10 +1,10 @@
 package com.bakigoal.demo.service
 
 import com.bakigoal.demo.dao.repository.BookRepository
-import com.bakigoal.demo.dto.BookDto
 import com.bakigoal.demo.exception.EntityAlreadyExistsException
 import com.bakigoal.demo.exception.EntityNotFoundException
 import com.bakigoal.demo.mapper.BookMapper
+import com.bakigoal.model.BookDto
 import org.springframework.stereotype.Service
 import java.util.stream.Collectors
 
@@ -27,15 +27,15 @@ class BookService(
     }
 
     fun addBook(book: BookDto): BookDto {
-        if (book.id != null && bookRepository.existsById(book.id!!)) {
-            throw EntityAlreadyExistsException(book.id!!)
+        if (book.id != null && bookRepository.existsById(book.id)) {
+            throw EntityAlreadyExistsException(book.id)
         }
         val savedBook = bookRepository.save(bookMapper.toEntity(book))
         return bookMapper.toDto(savedBook)
     }
 
     fun updateBook(book: BookDto): BookDto {
-        if (book.id == null || !bookRepository.existsById(book.id!!)) {
+        if (book.id == null || !bookRepository.existsById(book.id)) {
             throw EntityNotFoundException(book.id!!)
         }
         val savedBook = bookRepository.save(bookMapper.toEntity(book))

@@ -1,8 +1,8 @@
 package com.bakigoal.demo.service
 
 import com.bakigoal.demo.dao.repository.AuthorRepository
-import com.bakigoal.demo.dto.AuthorDto
 import com.bakigoal.demo.mapper.AuthorMapper
+import com.bakigoal.model.AuthorDto
 import org.springframework.stereotype.Service
 import java.util.stream.Collectors
 

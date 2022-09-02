@@ -1,7 +1,7 @@
 package com.bakigoal.demo.mapper
 
 import com.bakigoal.demo.dao.entity.Author
-import com.bakigoal.demo.dto.AuthorDto
+import com.bakigoal.model.AuthorDto
 import org.mapstruct.Mapper
 import org.mapstruct.ReportingPolicy
 

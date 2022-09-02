@@ -1,72 +1,38 @@
 package com.bakigoal.demo.rest
 
+import com.bakigoal.api.BooksApi
 import com.bakigoal.demo.service.BookService
-import com.bakigoal.demo.dto.BookDto
-import io.swagger.v3.oas.annotations.Operation
-import io.swagger.v3.oas.annotations.responses.ApiResponse
-import io.swagger.v3.oas.annotations.responses.ApiResponses
+import com.bakigoal.model.BookDto
 import mu.KLogging
-import org.springframework.web.bind.annotation.*
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/books")
 class BookController(
     val bookService: BookService
-) {
+) : BooksApi {
 
     companion object : KLogging() {
     }
 
-    @GetMapping
-    @Operation(summary = "Get list of Books", description = "Returns 200 if successful")
-    @ApiResponses(
-        value = [
-            ApiResponse(responseCode = "200", description = "Successful Operation"),
-            ApiResponse(responseCode = "500", description = "Internal Error")
-        ]
-    )
-    fun getAllBooks(): List<BookDto> {
+    override fun getAllBooks(): ResponseEntity<List<BookDto>> {
         logger.info { "get All Books API is called..." }
-        return bookService.getAllBooks()
+        return ResponseEntity.ok(bookService.getAllBooks())
     }
 
-    @GetMapping("/{id}")
-    @Operation(summary = "Get Book by id", description = "Returns 200 if successful")
-    @ApiResponses(
-        value = [
-            ApiResponse(responseCode = "200", description = "Successful Operation"),
-            ApiResponse(responseCode = "404", description = "Book not found")
-        ]
-    )
-    fun getBook(@PathVariable id: Long): BookDto {
+    override fun getBook(@PathVariable("id") id: Long): ResponseEntity<BookDto> {
         logger.info { "get Book By Id API is called..." }
-        return bookService.getBookById(id)
+        return ResponseEntity.ok(bookService.getBookById(id))
     }
 
-    @PostMapping
-    @Operation(summary = "Create Book", description = "Returns 200 if successful")
-    @ApiResponses(
-        value = [
-            ApiResponse(responseCode = "200", description = "Successful Operation"),
-            ApiResponse(responseCode = "500", description = "Internal Error")
-        ]
-    )
-    fun addBook(@RequestBody book: BookDto): BookDto {
+    override fun createBook(bookDto: BookDto): ResponseEntity<BookDto> {
         logger.info { "add Book API is called..." }
-        return bookService.addBook(book)
+        return ResponseEntity.ok(bookService.addBook(bookDto))
     }
 
-    @PutMapping("/{id}")
-    @Operation(summary = "Update Book", description = "Returns 200 if successful")
-    @ApiResponses(
-        value = [
-            ApiResponse(responseCode = "200", description = "Successful Operation"),
-            ApiResponse(responseCode = "404", description = "Book not found")
-        ]
-    )
-    fun updateBook(@RequestBody book: BookDto, @PathVariable id: Long): BookDto {
+    override fun updateBook(id: Long, bookDto: BookDto): ResponseEntity<BookDto> {
         logger.info { "update Book API is called..." }
-        book.id = id
-        return bookService.updateBook(book)
+        return ResponseEntity.ok(bookService.updateBook(bookDto))
     }
 }

@@ -1,0 +1,132 @@
+openapi: "3.0.0"
+info:
+  version: 0.0.1
+  title: Author Repo
+servers:
+  - url: http://localhost:8080
+paths:
+  /api/books:
+    get:
+      summary: List of books.
+      description: Returns the list of all books
+      operationId: get_all_books
+      tags:
+        - Books
+      responses:
+        '200':
+          description: List of all books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookDto'
+    post:
+      summary: Create book.
+      description: Create a book
+      operationId: create_book
+      tags:
+        - Books
+      requestBody:
+        description: Required information to create a book
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": '#/components/schemas/BookDto'
+      responses:
+        '200':
+          description: Created book
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDto'
+  /api/books/{id}:
+    get:
+      summary: Get book.
+      description: Get a book
+      operationId: get_book
+      parameters:
+        - name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+          in: path
+      tags:
+        - Books
+      responses:
+        '200':
+          description: Get book
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDto'
+    put:
+      summary: Update book.
+      description: Update a book
+      operationId: update_book
+      parameters:
+        - name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+          in: path
+      tags:
+        - Books
+      requestBody:
+        description: Required information to update a book
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": '#/components/schemas/BookDto'
+      responses:
+        '200':
+          description: Updated book
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDto'
+  /api/authors:
+    get:
+      summary: List of authors.
+      description: Returns the list of all authors
+      operationId: get_all_authors
+      tags:
+        - Authors
+      responses:
+        '200':
+          description: List of all authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuthorDto'
+components:
+  schemas:
+    BookDto:
+      required:
+        - title
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+          description: Title of the Book
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorDto'
+    AuthorDto:
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the Author
+        dateOfBirth:
+          type: string

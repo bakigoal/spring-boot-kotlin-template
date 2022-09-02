@@ -1,7 +1,7 @@
 package com.bakigoal.demo.mapper
 
 import com.bakigoal.demo.dao.entity.Book
-import com.bakigoal.demo.dto.BookDto
+import com.bakigoal.model.BookDto
 import org.mapstruct.Mapper
 import org.mapstruct.ReportingPolicy
 
