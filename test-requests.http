@@ -1,0 +1,41 @@
+###
+GET http://localhost:8080/api/books
+###
+POST http://localhost:8080/api/books
+Content-Type: application/json
+
+{
+  "title": "Book 1"
+}
+###
+POST http://localhost:8080/api/books
+Content-Type: application/json
+
+{
+  "title": "Евгений Онегин",
+  "authors": [
+    {
+      "name": "Alexandr Pushkin",
+      "dateOfBirth": "1799-06-06"
+    }
+  ]
+}
+###
+GET http://localhost:8080/api/books
+###
+PUT http://localhost:8080/api/books/1
+Content-Type: application/json
+
+{
+  "title": "Руслан и Людмила",
+  "authors": [
+    {
+      "name": "Alexandr Pushkin",
+      "dateOfBirth": "1799-06-06"
+    }
+  ]
+}
+###
+GET http://localhost:8080/api/books
+###
+GET http://localhost:8080/api/authors

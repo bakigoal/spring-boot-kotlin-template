@@ -12,7 +12,7 @@ data class Book(
     @JoinTable(
         name = "book_author",
         joinColumns = [JoinColumn(name = "book_id")],
-        inverseJoinColumns = [JoinColumn(name = "author_id")]
+        inverseJoinColumns = [JoinColumn(name = "author_name")]
     )
     val authors: Set<Author> = HashSet()
 )
