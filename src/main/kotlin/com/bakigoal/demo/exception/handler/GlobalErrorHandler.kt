@@ -22,7 +22,7 @@ class GlobalErrorHandler : ResponseEntityExceptionHandler() {
             ex.message,
             request.request.servletPath
         )
-        logger.error("Error: $body")
+        logger.error("Error: ${ex.stackTraceToString()}")
         return ResponseEntity.status(status).body(body)
     }
 
@@ -34,7 +34,7 @@ class GlobalErrorHandler : ResponseEntityExceptionHandler() {
             ex.message ?: status.reasonPhrase,
             request.request.servletPath
         )
-        logger.error("Error: $body")
+        logger.error("Error: ${ex.stackTraceToString()}")
         return ResponseEntity.status(status).body(body)
     }
 }

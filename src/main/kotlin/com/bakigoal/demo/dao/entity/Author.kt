@@ -7,6 +7,6 @@ import javax.persistence.Id
 @Entity
 data class Author(
     @Id
-    val name: String,
+    var name: String,
     var dateOfBirth: LocalDate?
 )
